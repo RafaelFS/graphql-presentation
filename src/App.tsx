@@ -1,8 +1,10 @@
 import ApolloClient from "apollo-boost";
 import gql from "graphql-tag";
 
-import React, { Component } from 'react';
+import React, { Component, CSSProperties } from 'react';
+
 import './App.css';
+import './CharacterCard.css'
 
 interface CharacterListState {
   characters: any;
@@ -27,6 +29,8 @@ class App extends Component<{}, CharacterListState> {
             results {
               id
               name
+              image
+              species
             }
           }
         }
@@ -53,11 +57,35 @@ class App extends Component<{}, CharacterListState> {
 
 function CharacterList(props: any) {
   const characters = props.characters;
+  const cardStyle = {
+    marginTop: "50px",
+    marginRight: "15px"
+  }
+  const gridStyle: CSSProperties = {
+    width: "100%",
+    display: "flex",
+    flexWrap: "wrap"
+  }
   const listCharacters = characters.map((character: any) =>
-   <p key={character.id}>{character.name}</p>
+  <div key={character.id} style={cardStyle}>
+    <CharacterCard style={cardStyle} character={character}/>
+  </div>
   );
   return (
-    <div>{listCharacters}</div>
+    <div style={gridStyle}>{listCharacters}</div>
+  );
+}
+
+function CharacterCard(props: any) {
+  let { name, image, species} = props.character;
+  return (
+    <div className="card">
+      <img src={image} alt="Avatar" className="card__img" />
+      <div className="card__container">
+        <h4><b>{name}</b></h4>
+        <p>{species}</p>
+      </div>
+    </div>
   );
 }
 
