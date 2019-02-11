@@ -35,8 +35,7 @@ class App extends Component<{}, CharacterListState> {
           }
         }
       `
-    })
-    .then(result => {
+    }).then((result) => {
       this.setState((state, props) => ({
         ...state,
         characters: result.data.characters.results
