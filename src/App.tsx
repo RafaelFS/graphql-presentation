@@ -1,7 +1,7 @@
-import ApolloClient from "apollo-boost";
+import React, { Component, CSSProperties } from 'react';
 import gql from "graphql-tag";
 
-import React, { Component, CSSProperties } from 'react';
+import graphqlClient from "./GraphqlClient"
 
 import './App.css';
 import './CharacterCard.css'
@@ -18,11 +18,8 @@ class App extends Component<{}, CharacterListState> {
   }
 
   componentDidMount() {
-    const client = new ApolloClient({
-      uri: "https://rickandmortyapi.com/graphql"
-    });
 
-    client.query<any>({
+    graphqlClient.query<any>({
       query: gql`
         {
           characters(,filter: { name: "rick" }) {
@@ -54,7 +51,7 @@ class App extends Component<{}, CharacterListState> {
 }
 
 
-function CharacterList(props: any) {
+export function CharacterList(props: any) {
   const characters = props.characters;
   const cardStyle = {
     marginTop: "50px",
