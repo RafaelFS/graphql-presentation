@@ -1,10 +1,11 @@
 import React, { Component, CSSProperties } from 'react';
-import gql from "graphql-tag";
+import { ApolloProvider } from "react-apollo";
 
 import graphqlClient from "./GraphqlClient"
 
 import './App.css';
 import './CharacterCard.css'
+import CharacterListWithData from  "./CharacterListWithData"
 
 interface CharacterListState {
   characters: any;
@@ -12,39 +13,12 @@ interface CharacterListState {
 
 
 class App extends Component<{}, CharacterListState> {
-  constructor(props: {}) {
-    super(props);
-    this.state = { characters: [] };
-  }
-
-  componentDidMount() {
-
-    graphqlClient.query<any>({
-      query: gql`
-        {
-          characters(,filter: { name: "rick" }) {
-            results {
-              id
-              name
-              image
-              species
-            }
-          }
-        }
-      `
-    }).then((result) => {
-      this.setState((state, props) => ({
-        ...state,
-        characters: result.data.characters.results
-      }));
-    });
-  }
-
-
   render() {
     return (
       <div className="App">
-        <CharacterList characters={this.state.characters} />
+        <ApolloProvider client={graphqlClient}>
+          <CharacterListWithData />
+        </ApolloProvider>
       </div>
     );
   }
