@@ -4,9 +4,9 @@ I am revisiting this repo 5 months later and this is basically 50 years in web d
 
 I will create new examples and archive this repo since it doesn't seem to work anymore
 
-React + Apollo (coming soon)
-React + React Apollo (coming soon)
-React + React Apollo + Typescript (coming soon)
+- React + Apollo (coming soon)
+- React + React Apollo (coming soon)
+- React + React Apollo + Typescript (coming soon)
 
 ----
 
